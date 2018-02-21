@@ -1,4 +1,4 @@
-A tool to analyze compassQL recommendations by field and aggregate / bin transformations.
+A tool to analyze CompassQL recommendations by field and aggregate / bin transformations.
 
 To start the app, run
 
