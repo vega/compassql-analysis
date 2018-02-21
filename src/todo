@@ -1,0 +1,16 @@
+LINK COMPASSQL:
+  go to compassQL folder
+  > yarn link
+
+  go to analysis project
+  > yarn link compassQL
+
+  now your node_module/compassql should be come a symlink to your local CompassQL directory that you run yarn link
+
+TODO:
+  choose dataset
+  show subscores
+  limit nominal/ordinal size (can look at schema)
+  message when no visualizations
+  generate sorted string for field types as title (e.g. QxQxbin(Q))
+
