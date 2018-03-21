@@ -29,7 +29,6 @@ class Display extends Component {
     const visualizations = [];
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
-      console.log(result);
       visualizations.push(
         <Visualization key={i} id={i} vlSpec={result.spec}
                        scores={result.scores} ranking={i + 1}/>

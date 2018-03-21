@@ -28,16 +28,12 @@ class Recommender {
     const results = [];
     const seen = new Set();
     cql.result.mapLeaves(recs, (item) => {
-      const id = item.toShorthand([REPLACE]);
-      if (!seen.has(id)) {
-        seen.add(id);
-        const spec = item.toSpec();
-        const scores = item._rankingScore.effectiveness;
-        results.push({
-          spec: spec,
-          scores: scores,
-        });
-      }
+      const spec = item.toSpec();
+      const scores = item._rankingScore.effectiveness;
+      results.push({
+        spec: spec,
+        scores: scores,
+      });
     });
 
     return results;
