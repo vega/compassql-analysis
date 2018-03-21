@@ -21,8 +21,8 @@ const DEFAULT_DIMENSION_CONFIG = {
 
 const FIELD_TYPES = ['quantitative', 'temporal', 'ordinal', 'nominal'];
 const FIELD_TRANSFORMATIONS = {
-  'quantitative': ['none', 'bin', 'mean', 'sum'],
-  'temporal': ['none', 'bin'],
+  'quantitative': ['?', 'none', 'bin', 'mean', 'sum'],
+  'temporal': ['?', 'none', 'bin'],
   'ordinal': ['none'],
   'nominal': ['none']
 };
@@ -152,10 +152,16 @@ class App extends Component {
     const binTypes = [];
     for (const dimension of this.state.dimensions) {
       if (dimension.fieldTransformation !== null &&
-          dimension.fieldTransformation === 'bin' &&
           dimension.fieldTypeLocked &&
           dimension.fieldTransformationLocked) {
-        binTypes.push(true);
+
+        if (dimension.fieldTransformation === 'bin') {
+          binTypes.push(true);
+        } else if (dimension.fieldTransformation === '?') {
+          binTypes.push('?');
+        } else {
+          binTypes.push(false);
+        }
       } else {
         binTypes.push(false);
       }
@@ -169,7 +175,8 @@ class App extends Component {
     for (const dimension of this.state.dimensions) {
       if (dimension.fieldTransformation !== null &&
           (dimension.fieldTransformation === 'mean' ||
-          dimension.fieldTransformation === 'sum') &&
+          dimension.fieldTransformation === 'sum' ||
+          dimension.fieldTransformation === '?') &&
           dimension.fieldTypeLocked &&
           dimension.fieldTransformationLocked) {
         aggTypes.push(dimension.fieldTransformation);
