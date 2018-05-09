@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 
+import Config from './Config';
 import Dimension from './Dimension';
 import Display from './Display';
 import DatasetChooser from './DatasetChooser';
@@ -27,18 +28,22 @@ const FIELD_TRANSFORMATIONS = {
   'nominal': ['none']
 };
 
+const OPTIONS = ['autoAddCount'];
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dimensions: [],
       datasetName: 'cars.json',
+      selectedOptions: []
     };
 
     this.data = require('vega-datasets/data/' + DEFAULT_DATASET_NAME);
     this.schema = new Schema(require('vega-datasets/data/' + this.state.datasetName));
-    console.log(this.schema);
     this.recommender = new Recommender();
+
+    this.toggleOption = this.toggleOption.bind(this);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -91,6 +96,7 @@ class App extends Component {
         fieldTypes={fieldTypes}
         fieldBins={fieldBins}
         fieldAggregates={fieldAggregates}
+        options={this.state.selectedOptions}
       />
     );
 
@@ -99,6 +105,8 @@ class App extends Component {
         <div className="dashboard">
           <DatasetChooser dataset={this.state.datasetName} datasets={datasets}
                           setDataset={this.setDataset.bind(this)}/>
+          <Config options={OPTIONS} selectedOptions={this.state.selectedOptions}
+            toggleOption={this.toggleOption}/>
           {dimensions}
           <div className="add-dimension-button-container">
             <div className="add-dimension-button" onClick={this.addDimension.bind(this)}>
@@ -233,6 +241,18 @@ class App extends Component {
   removeDimension(id) {
     this.state.dimensions.splice(id, 1);
     this.forceUpdate();
+  }
+
+  toggleOption(opt) {
+    if (this.state.selectedOptions.includes(opt)) {
+      this.setState({
+        selectedOptions: this.state.selectedOptions.filter((option) => { return opt !== option })
+      })
+    } else {
+      this.setState({
+        selectedOptions: this.state.selectedOptions.concat([opt])
+      });
+    }
   }
 }
 

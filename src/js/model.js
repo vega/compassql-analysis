@@ -14,12 +14,13 @@ class Model {
    *          N (Nominal)
    *          T (Time)
    */
-  constructor(data, schema, fieldTypes, fieldAggregates, fieldBins) {
+  constructor(data, schema, fieldTypes, fieldAggregates, fieldBins, options) {
     this.data = data;
     this.schema = schema;
     this.fieldTypes = fieldTypes;
     this.fieldAggregates = fieldAggregates;
     this.fieldBins = fieldBins;
+    this.options = options;
   }
 
   /**
@@ -64,6 +65,10 @@ class Model {
 
     query['spec'] = spec;
     query['orderBy'] = 'effectiveness';
+    query['config'] = this.options.reduce((obj, opt) => {
+      obj[opt] = true;
+      return obj;
+    }, {});
 
     return query;
   }

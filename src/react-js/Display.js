@@ -20,7 +20,8 @@ class Display extends Component {
       this.props.schema,
       this.props.fieldTypes,
       this.props.fieldAggregates,
-      this.props.fieldBins
+      this.props.fieldBins,
+      this.props.options
     );
     const query = model.generate();
 

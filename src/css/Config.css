@@ -1,0 +1,35 @@
+.Config {
+  display: flex;
+  flex-direction: row;
+  border-style: dotted;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #b5b5b5;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.Config .option {
+  font-size: 12px;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Config .option:hover {
+  background-color: #dae6fa;
+}
+
+.Config .option.selected {
+  background-color: #adccff;
+}
+
+.Config .title {
+  background-color: #e8e8e8;
+  border-radius: 4px 0 0 4px;
+  color: #3f3f3f;
+  user-select: none;
+  padding: 4px 8px 4px 8px;
+}
